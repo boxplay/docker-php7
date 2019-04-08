@@ -1,7 +1,5 @@
 FROM ubuntu:16.04
 
-ENV DEBIAN_FRONTEND noninteractive
-
 COPY ./sources.list /etc/apt/sources.list
 RUN apt-get update
 
