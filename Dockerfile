@@ -41,7 +41,7 @@ RUN ssh-keygen -f 'id_rsa' -t rsa -N ''
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 WORKDIR /var/www/html
-RUN apt-get install nodejs && apt-get install npm
+RUN apt-get install -y nodejs-legacy && apt-get install -y npm
 
 COPY ./fpm-pool-www.conf /etc/php/7.1/fpm/pool.d/www.conf
 RUN mkdir /run/php/ -p
