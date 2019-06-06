@@ -40,12 +40,11 @@ RUN ssh-keygen -f 'id_rsa' -t rsa -N ''
 # clean up
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-WORKDIR /home/wwwroot
+WORKDIR /var/www/html
+RUN apt-get install nodejs && apt-get install npm
 
 COPY ./fpm-pool-www.conf /etc/php/7.1/fpm/pool.d/www.conf
 RUN mkdir /run/php/ -p
 
 EXPOSE 9000
 CMD ["/usr/sbin/php-fpm7.1", "-F"]
-WORKDIR /var/www/html
-RUN apt-get install nodejs && apt-get install npm
