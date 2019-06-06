@@ -12,16 +12,16 @@ ENV LANG=en_US.UTF-8
 RUN add-apt-repository ppa:ondrej/php && \
     apt-get update
 
-RUN apt-get install php7.2-fpm php7.2-gd php7.2-cli php7.2-curl php7.2-dev php7.2-json php7.2-mbstring php7.2-mcrypt php7.2-mysql php7.2-xml php7.2-zip php7.2-opcache php-redis php7.2-mongodb -y --fix-missing
+RUN apt-get install php7.1-fpm php7.1-gd php7.1-cli php7.1-curl php7.1-dev php7.1-json php7.1-mbstring php7.1-mcrypt php7.1-mysql php7.1-xml php7.1-zip php7.1-opcache php-redis php7.1-mongodb -y --fix-missing
 
 # install phalcon
 RUN curl -s https://packagecloud.io/install/repositories/phalcon/stable/script.deb.sh | bash && \
-    apt-get install php7.2-phalcon -y
+    apt-get install php7.1-phalcon -y
 
 RUN pecl install swoole && \
-    echo "extension=swoole.so" > /etc/php/7.2/mods-available/swoole.ini && \
-    ln -s /etc/php/7.2/mods-available/swoole.ini /etc/php/7.2/cli/conf.d/20-swoole.ini && \
-    ln -s /etc/php/7.2/mods-available/swoole.ini /etc/php/7.2/fpm/conf.d/20-swoole.ini
+    echo "extension=swoole.so" > /etc/php/7.1/mods-available/swoole.ini && \
+    ln -s /etc/php/7.1/mods-available/swoole.ini /etc/php/7.1/cli/conf.d/20-swoole.ini && \
+    ln -s /etc/php/7.1/mods-available/swoole.ini /etc/php/7.1/fpm/conf.d/20-swoole.ini
 
 RUN cd / && \
     php -r "copy('https://install.phpcomposer.com/installer', 'composer-setup.php');" && \
@@ -42,8 +42,10 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 WORKDIR /home/wwwroot
 
-COPY ./fpm-pool-www.conf /etc/php/7.2/fpm/pool.d/www.conf
+COPY ./fpm-pool-www.conf /etc/php/7.1/fpm/pool.d/www.conf
 RUN mkdir /run/php/ -p
 
 EXPOSE 9000
-CMD ["/usr/sbin/php-fpm7.2", "-F"]
+CMD ["/usr/sbin/php-fpm7.1", "-F"]
+WORKDIR /var/www/html
+RUN apt-get install nodejs && apt-get install npm
