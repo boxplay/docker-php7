@@ -42,7 +42,6 @@ RUN ssh-keygen -f 'id_rsa' -t rsa -N ''
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 WORKDIR /var/www/html
-RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash && nvm install 8.11.2 && npm config set registry=https://registry.npm.taobao.org
 
 COPY ./fpm-pool-www.conf /etc/php/7.1/fpm/pool.d/www.conf
 RUN mkdir /run/php/ -p
