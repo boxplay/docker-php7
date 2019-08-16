@@ -1,3 +1,3 @@
 FROM codeboy/ubuntu-test:v1
-RUN sh /etc/init.d/nginx.sh
+CMD ["/usr/sbin/nginx", "-g", "daemon off;"]
 EXPOSE 9000
