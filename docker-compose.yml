@@ -1,2 +1,16 @@
-service:
+app:
     build: ./
+    tty: true
+    expose:
+      - "9000"
+    ports:
+      - "8088:80"
+nginx:
+    build: ./nginx
+    ports:
+      - "8086:80"
+    links:
+      - "app"
+    volumes:
+      - ./index.php:/var/www/html/index.php
+      - ./index.html:/var/www/html/index.html
