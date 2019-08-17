@@ -3,8 +3,6 @@ app:
     tty: true
     expose:
       - "9000"
-    ports:
-      - "8088:80"
 nginx:
     build: ./nginx
     ports:

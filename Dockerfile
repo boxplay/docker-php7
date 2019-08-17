@@ -1,3 +1,3 @@
-FROM codeboy/ubuntu-test:v1
-CMD ["/usr/sbin/nginx", "-g", "daemon off;"]
+FROM codeboy/ubuntu-php:v2
+CMD ["/usr/sbin/php-fpm7.2"]
 EXPOSE 9000
